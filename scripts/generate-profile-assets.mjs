@@ -21,8 +21,46 @@ const languageColors = {
   Shell: '#89e051',
 };
 
+const recentRepoFallbacks = [
+  {
+    name: 'DayDayUp',
+    description: '',
+    language: 'Swift',
+    updatedAt: '2026-06-23T13:09:00Z',
+  },
+  {
+    name: 'Doperationtool',
+    description: '',
+    language: 'Go',
+    updatedAt: '2026-06-23T04:55:53Z',
+  },
+  {
+    name: 'Threat-Intelligence',
+    description: 'Global threat-intelligence platform',
+    language: 'TypeScript',
+    updatedAt: '2026-06-13T11:22:09Z',
+  },
+  {
+    name: 'Xdfile-Manager',
+    description: '',
+    language: 'Go',
+    updatedAt: '2026-06-08T14:35:07Z',
+  },
+];
+
 async function fetchText(url) {
   const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}: ${url}`);
+  return res.text();
+}
+
+async function fetchHtml(url) {
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': `${username}-profile-assets`,
+      Accept: 'text/html,application/xhtml+xml',
+    },
+  });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}: ${url}`);
   return res.text();
 }
@@ -105,12 +143,69 @@ async function getContributions() {
   return { total, days };
 }
 
+async function getRecentRepos() {
+  try {
+    const repos = await fetchJson(`https://api.github.com/users/${username}/repos?per_page=20&type=owner&sort=updated`);
+    if (Array.isArray(repos)) {
+      return repos
+        .filter((repo) => !repo.fork && !repo.archived && repo.name !== username)
+        .slice(0, 4)
+        .map((repo) => ({
+          name: repo.name,
+          description: repo.description || '',
+          language: repo.language || 'Mixed',
+          updatedAt: repo.updated_at,
+        }));
+    }
+  } catch (error) {
+    console.warn(`Falling back to repository page: ${error.message}`);
+  }
+
+  try {
+    const html = await fetchHtml(`https://github.com/${username}?tab=repositories&sort=updated`);
+    const items = [...html.matchAll(/<li class="[^"]*public[^"]*"[\s\S]*?<\/li>/g)]
+      .map((match) => match[0])
+      .map((item) => {
+        const name = item.match(/itemprop="name codeRepository"[^>]*>\s*([^<]+)<\/a>/)?.[1]?.trim();
+        const description = item.match(/itemprop="description">\s*([\s\S]*?)\s*<\/p>/)?.[1]?.replace(/\s+/g, ' ').trim() || '';
+        const language = item.match(/itemprop="programmingLanguage">([^<]+)<\/span>/)?.[1]?.trim() || 'Mixed';
+        const updatedAt = item.match(/<relative-time datetime="([^"]+)"/)?.[1] || '';
+        return { name, description, language, updatedAt };
+      })
+      .filter((repo) => repo.name && repo.name !== username)
+      .sort((a, b) => new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0))
+      .slice(0, 4);
+
+    if (items.length > 0) return items;
+  } catch (error) {
+    console.warn(`Falling back to static recent repos: ${error.message}`);
+  }
+
+  return recentRepoFallbacks;
+}
+
 function escapeXml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;');
+}
+
+function truncateText(value, maxLength) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1)}…`;
+}
+
+function formatDate(value) {
+  if (!value) return 'recently';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'recently';
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+  }).format(date);
 }
 
 function languageSvg(languages) {
@@ -312,8 +407,71 @@ function activitySvg({ total, days }) {
 `;
 }
 
+function recentWorkSvg(repos) {
+  const width = 920;
+  const height = 328;
+  const rows = repos.slice(0, 4).map((repo, index) => {
+    const y = 86 + index * 58;
+    const color = languageColors[repo.language] || '#8b949e';
+    const description = truncateText(repo.description || 'Recently updated repository', 74);
+    return `
+      <g>
+        <rect x="32" y="${y - 27}" width="${width - 64}" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
+          <animate attributeName="opacity" values="0.48;0.72;0.55" dur="${4.2 + index * 0.2}s" begin="${(index * 0.18).toFixed(2)}s" repeatCount="indefinite" />
+        </rect>
+        <circle cx="52" cy="${y - 6}" r="6" fill="${color}">
+          <animate attributeName="r" values="5;7;5" dur="${2.8 + index * 0.18}s" begin="${(index * 0.13).toFixed(2)}s" repeatCount="indefinite" />
+        </circle>
+        <text x="70" y="${y - 8}" class="repo">${escapeXml(repo.name)}</text>
+        <text x="70" y="${y + 12}" class="desc">${escapeXml(description)}</text>
+        <text x="${width - 212}" y="${y - 8}" class="meta">${escapeXml(repo.language)}</text>
+        <text x="${width - 114}" y="${y - 8}" class="meta" text-anchor="end">${escapeXml(formatDate(repo.updatedAt))}</text>
+        <rect x="${width - 188}" y="${y + 6}" width="108" height="5" rx="2.5" fill="#0d1117" />
+        <rect x="${width - 188}" y="${y + 6}" width="${78 - index * 10}" height="5" rx="2.5" fill="${color}">
+          <animate attributeName="width" values="18;${78 - index * 10};${62 - index * 8};${78 - index * 10}" dur="4s" begin="${(index * 0.16).toFixed(2)}s" repeatCount="indefinite" />
+        </rect>
+      </g>`;
+  }).join('');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { fill: #f0f6fc; font-size: 24px; font-weight: 700; }
+    .sub { fill: #7d8590; font-size: 13px; }
+    .repo { fill: #58a6ff; font-size: 17px; font-weight: 700; }
+    .desc { fill: #8b949e; font-size: 13px; }
+    .meta { fill: #c9d1d9; font-size: 13px; font-weight: 600; }
+  </style>
+  <defs>
+    <linearGradient id="scan" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#58a6ff" stop-opacity="0.26" />
+      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="12" fill="#0d1117" stroke="#30363d" />
+  <text x="32" y="38" class="title">Recent Work</text>
+  <text x="32" y="59" class="sub">Latest public repositories by update time</text>
+  <g filter="url(#glow)">
+    ${rows}
+  </g>
+  <rect x="-120" y="0" width="120" height="${height}" fill="url(#scan)" opacity="0.85">
+    <animate attributeName="x" from="-140" to="${width + 80}" dur="7s" repeatCount="indefinite" />
+  </rect>
+</svg>
+`;
+}
+
 await mkdir(outDir, { recursive: true });
-const [languages, contributions] = await Promise.all([getLanguages(), getContributions()]);
+const [languages, contributions, recentRepos] = await Promise.all([getLanguages(), getContributions(), getRecentRepos()]);
 await writeFile(new URL('languages.svg', outDir), languageSvg(languages));
 await writeFile(new URL('activity.svg', outDir), activitySvg(contributions));
+await writeFile(new URL('recent-work.svg', outDir), recentWorkSvg(recentRepos));
 console.log(`Generated profile assets for ${username}`);
