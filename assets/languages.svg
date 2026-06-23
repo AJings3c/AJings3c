@@ -24,32 +24,65 @@
             <animate attributeName="opacity" values="0.55;1;0.55" dur="2.8s" begin="0s" repeatCount="indefinite" />
           </rect>
           <text x="66" y="82" class="label">TypeScript</text>
-          <text x="176" y="82" class="value">33.3%</text>
+          <text x="176" y="82" class="value">29.8%</text>
           <rect x="228" y="73" width="260" height="7" rx="3.5" fill="#161b22" />
-          <rect x="228" y="73" width="87" height="7" rx="3.5" fill="#3178c6">
-            <animate attributeName="width" values="8;87;77;87" dur="4s" begin="0s" repeatCount="indefinite" />
+          <rect x="228" y="73" width="78" height="7" rx="3.5" fill="#3178c6">
+            <animate attributeName="width" values="8;78;68;78" dur="4s" begin="0s" repeatCount="indefinite" />
           </rect>
         </g>
         <g>
-          <rect x="44" y="97" width="12" height="12" rx="3" fill="#00ADD8">
+          <rect x="44" y="97" width="12" height="12" rx="3" fill="#00add8">
             <animate attributeName="opacity" values="0.55;1;0.55" dur="2.98s" begin="0.1s" repeatCount="indefinite" />
           </rect>
           <text x="66" y="107" class="label">Go</text>
-          <text x="176" y="107" class="value">33.3%</text>
+          <text x="176" y="107" class="value">21.8%</text>
           <rect x="228" y="98" width="260" height="7" rx="3.5" fill="#161b22" />
-          <rect x="228" y="98" width="87" height="7" rx="3.5" fill="#00ADD8">
-            <animate attributeName="width" values="8;87;77;87" dur="4s" begin="0.16s" repeatCount="indefinite" />
+          <rect x="228" y="98" width="57" height="7" rx="3.5" fill="#00add8">
+            <animate attributeName="width" values="8;57;47;57" dur="4s" begin="0.16s" repeatCount="indefinite" />
           </rect>
         </g>
         <g>
-          <rect x="44" y="122" width="12" height="12" rx="3" fill="#F05138">
+          <rect x="44" y="122" width="12" height="12" rx="3" fill="#f05138">
             <animate attributeName="opacity" values="0.55;1;0.55" dur="3.1599999999999997s" begin="0.2s" repeatCount="indefinite" />
           </rect>
           <text x="66" y="132" class="label">Swift</text>
-          <text x="176" y="132" class="value">33.3%</text>
+          <text x="176" y="132" class="value">21.6%</text>
           <rect x="228" y="123" width="260" height="7" rx="3.5" fill="#161b22" />
-          <rect x="228" y="123" width="87" height="7" rx="3.5" fill="#F05138">
-            <animate attributeName="width" values="8;87;77;87" dur="4s" begin="0.32s" repeatCount="indefinite" />
+          <rect x="228" y="123" width="56" height="7" rx="3.5" fill="#f05138">
+            <animate attributeName="width" values="8;56;46;56" dur="4s" begin="0.32s" repeatCount="indefinite" />
+          </rect>
+        </g>
+        <g>
+          <rect x="44" y="147" width="12" height="12" rx="3" fill="#f1e05a">
+            <animate attributeName="opacity" values="0.55;1;0.55" dur="3.34s" begin="0.30000000000000004s" repeatCount="indefinite" />
+          </rect>
+          <text x="66" y="157" class="label">JavaScript</text>
+          <text x="176" y="157" class="value">18.9%</text>
+          <rect x="228" y="148" width="260" height="7" rx="3.5" fill="#161b22" />
+          <rect x="228" y="148" width="49" height="7" rx="3.5" fill="#f1e05a">
+            <animate attributeName="width" values="8;49;39;49" dur="4s" begin="0.48s" repeatCount="indefinite" />
+          </rect>
+        </g>
+        <g>
+          <rect x="44" y="172" width="12" height="12" rx="3" fill="#663399">
+            <animate attributeName="opacity" values="0.55;1;0.55" dur="3.5199999999999996s" begin="0.4s" repeatCount="indefinite" />
+          </rect>
+          <text x="66" y="182" class="label">CSS</text>
+          <text x="176" y="182" class="value">4.8%</text>
+          <rect x="228" y="173" width="260" height="7" rx="3.5" fill="#161b22" />
+          <rect x="228" y="173" width="22" height="7" rx="3.5" fill="#663399">
+            <animate attributeName="width" values="8;22;18;22" dur="4s" begin="0.64s" repeatCount="indefinite" />
+          </rect>
+        </g>
+        <g>
+          <rect x="44" y="197" width="12" height="12" rx="3" fill="#3572a5">
+            <animate attributeName="opacity" values="0.55;1;0.55" dur="3.6999999999999997s" begin="0.5s" repeatCount="indefinite" />
+          </rect>
+          <text x="66" y="207" class="label">Python</text>
+          <text x="176" y="207" class="value">2.2%</text>
+          <rect x="228" y="198" width="260" height="7" rx="3.5" fill="#161b22" />
+          <rect x="228" y="198" width="22" height="7" rx="3.5" fill="#3572a5">
+            <animate attributeName="width" values="8;22;18;22" dur="4s" begin="0.8s" repeatCount="indefinite" />
           </rect>
         </g>
   <g filter="url(#glow)">
@@ -57,19 +90,34 @@
     <g>
       
         <circle cx="525" cy="132" r="70" fill="none" stroke="#3178c6" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="146.61 293.22" stroke-dashoffset="0.00"
+          stroke-linecap="round" stroke-dasharray="131.13 308.69" stroke-dashoffset="0.00"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.2s" begin="0s" repeatCount="indefinite" />
         </circle>
-        <circle cx="525" cy="132" r="70" fill="none" stroke="#00ADD8" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="146.61 293.22" stroke-dashoffset="-146.61"
+        <circle cx="525" cy="132" r="70" fill="none" stroke="#00add8" stroke-width="24"
+          stroke-linecap="round" stroke-dasharray="95.99 343.83" stroke-dashoffset="-131.13"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.4000000000000004s" begin="0.15s" repeatCount="indefinite" />
         </circle>
-        <circle cx="525" cy="132" r="70" fill="none" stroke="#F05138" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="146.61 293.22" stroke-dashoffset="-293.22"
+        <circle cx="525" cy="132" r="70" fill="none" stroke="#f05138" stroke-width="24"
+          stroke-linecap="round" stroke-dasharray="95.10 344.72" stroke-dashoffset="-227.12"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.6s" begin="0.3s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="525" cy="132" r="70" fill="none" stroke="#f1e05a" stroke-width="24"
+          stroke-linecap="round" stroke-dasharray="83.25 356.58" stroke-dashoffset="-322.22"
+          transform="rotate(-90 525 132)" opacity="0.92">
+          <animate attributeName="stroke-width" values="22;27;22" dur="3.8000000000000003s" begin="0.44999999999999996s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="525" cy="132" r="70" fill="none" stroke="#663399" stroke-width="24"
+          stroke-linecap="round" stroke-dasharray="20.96 418.87" stroke-dashoffset="-405.47"
+          transform="rotate(-90 525 132)" opacity="0.92">
+          <animate attributeName="stroke-width" values="22;27;22" dur="4s" begin="0.6s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="525" cy="132" r="70" fill="none" stroke="#3572a5" stroke-width="24"
+          stroke-linecap="round" stroke-dasharray="9.55 430.27" stroke-dashoffset="-426.43"
+          transform="rotate(-90 525 132)" opacity="0.92">
+          <animate attributeName="stroke-width" values="22;27;22" dur="4.2s" begin="0.75s" repeatCount="indefinite" />
         </circle>
       <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 525 132" to="360 525 132" dur="28s" repeatCount="indefinite" />
     </g>
