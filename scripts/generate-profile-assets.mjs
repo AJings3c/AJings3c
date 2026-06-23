@@ -93,6 +93,15 @@ async function getContributions() {
     }))
     .sort((a, b) => a.week - b.week || a.weekday - b.weekday);
 
+  const counts = new Map(
+    [...html.matchAll(/for="contribution-day-component-(\d+)-(\d+)"[^>]*>(No|\d+)\s+contributions?/g)]
+      .map((match) => [`${match[1]}-${match[2]}`, match[3] === 'No' ? 0 : Number(match[3])]),
+  );
+
+  for (const day of days) {
+    day.count = counts.get(`${day.weekday}-${day.week}`) || 0;
+  }
+
   return { total, days };
 }
 
@@ -185,38 +194,67 @@ function languageSvg(languages) {
 `;
 }
 
+function niceCeil(value) {
+  if (value <= 10) return 10;
+  if (value <= 30) return 30;
+  if (value <= 50) return 50;
+  if (value <= 70) return 70;
+  return Math.ceil(value / 25) * 25;
+}
+
+function smoothPath(points) {
+  if (points.length < 2) return '';
+  const d = [`M${points[0].x.toFixed(2)},${points[0].y.toFixed(2)}`];
+  for (let i = 0; i < points.length - 1; i += 1) {
+    const p0 = points[Math.max(0, i - 1)];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[Math.min(points.length - 1, i + 2)];
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const minY = Math.min(p1.y, p2.y);
+    const maxY = Math.max(p1.y, p2.y);
+    const cp1y = Math.min(maxY, Math.max(minY, p1.y + (p2.y - p0.y) / 6));
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = Math.min(maxY, Math.max(minY, p2.y - (p3.y - p1.y) / 6));
+    d.push(`C${cp1x.toFixed(2)},${cp1y.toFixed(2)} ${cp2x.toFixed(2)},${cp2y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`);
+  }
+  return d.join('');
+}
+
 function activitySvg({ total, days }) {
   const width = 920;
-  const height = 238;
-  const left = 54;
-  const top = 72;
-  const cell = 11;
-  const gap = 4;
-  const colors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const cells = days
-    .map((day) => {
-      const x = left + day.week * (cell + gap);
-      const y = top + day.weekday * (cell + gap);
-      const color = colors[day.level] || colors[0];
-      const delay = (day.week * 0.035 + day.weekday * 0.04).toFixed(2);
-      const pulse = day.level > 0
-        ? `<animate attributeName="opacity" values="0.65;1;0.8;1" dur="3.4s" begin="${delay}s" repeatCount="indefinite" />`
-        : `<animate attributeName="opacity" values="0.35;0.55;0.35" dur="5.2s" begin="${delay}s" repeatCount="indefinite" />`;
-      return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="3" fill="${color}">${pulse}</rect>`;
-    })
+  const height = 318;
+  const plot = { x: 76, y: 78, width: 794, height: 176 };
+  const recent = days
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(-31);
+  const maxCount = niceCeil(Math.max(10, ...recent.map((day) => day.count || 0)));
+  const points = recent.map((day, index) => ({
+    x: plot.x + (index * plot.width) / Math.max(1, recent.length - 1),
+    y: plot.y + plot.height - ((day.count || 0) / maxCount) * plot.height,
+    count: day.count || 0,
+    label: String(Number(day.date.slice(8, 10))),
+  }));
+  const linePath = smoothPath(points);
+  const areaPath = `${linePath} L${plot.x + plot.width},${plot.y + plot.height} L${plot.x},${plot.y + plot.height} Z`;
+  const gridY = [0, 0.25, 0.5, 0.75, 1].map((ratio) => plot.y + plot.height * ratio);
+  const gridX = Array.from({ length: 16 }, (_, index) => plot.x + (index * plot.width) / 15);
+  const labels = points
+    .filter((_, index) => index % 3 === 0 || index === points.length - 1)
+    .map((point) => `<text x="${point.x.toFixed(0)}" y="${plot.y + plot.height + 27}" class="axis" text-anchor="middle">${point.label}</text>`)
     .join('');
-
-  const months = [];
-  let previousMonth = '';
-  for (const day of days) {
-    const month = day.date.slice(5, 7);
-    if (day.weekday === 0 && month !== previousMonth) {
-      previousMonth = month;
-      months.push(`<text x="${left + day.week * (cell + gap)}" y="58" class="axis">${monthNames[Number(month) - 1]}</text>`);
-    }
-  }
+  const yLabels = [maxCount, maxCount * 0.75, maxCount * 0.5, maxCount * 0.25, 0]
+    .map((value, index) => `<text x="${plot.x - 18}" y="${gridY[index] + 4}" class="axis" text-anchor="end">${Math.round(value)}</text>`)
+    .join('');
+  const nodes = points
+    .filter((point) => point.count > 0)
+    .map((point, index) => `
+      <circle cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="4.5" fill="#58a6ff" stroke="#0d1117" stroke-width="2">
+        <animate attributeName="r" values="3.8;6.2;3.8" dur="2.6s" begin="${(index * 0.18).toFixed(2)}s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.75;1;0.75" dur="2.6s" begin="${(index * 0.18).toFixed(2)}s" repeatCount="indefinite" />
+      </circle>`)
+    .join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   <style>
@@ -224,15 +262,20 @@ function activitySvg({ total, days }) {
     .title { fill: #f0f6fc; font-size: 24px; font-weight: 700; }
     .sub { fill: #7d8590; font-size: 13px; }
     .axis { fill: #8b949e; font-size: 12px; font-weight: 600; }
+    .grid { stroke: #1f6feb; stroke-width: 1; stroke-dasharray: 2 5; opacity: 0.22; }
   </style>
   <defs>
-    <linearGradient id="sweep" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0" />
-      <stop offset="50%" stop-color="#58a6ff" stop-opacity="0.32" />
-      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0" />
+    <linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1f6feb" stop-opacity="0.46" />
+      <stop offset="100%" stop-color="#1f6feb" stop-opacity="0.03" />
+    </linearGradient>
+    <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#58a6ff" />
+      <stop offset="50%" stop-color="#1f6feb" />
+      <stop offset="100%" stop-color="#2f81f7" />
     </linearGradient>
     <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feGaussianBlur stdDeviation="4" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
         <feMergeNode in="SourceGraphic" />
@@ -241,20 +284,30 @@ function activitySvg({ total, days }) {
   </defs>
   <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="12" fill="#0d1117" stroke="#30363d" />
   <text x="32" y="38" class="title">Activity Rhythm</text>
-  <text x="32" y="59" class="sub">${total.toLocaleString('en-US')} contributions in the last year</text>
-  ${months.join('')}
-  <text x="18" y="${top + 1 * (cell + gap) + 10}" class="axis">Mon</text>
-  <text x="18" y="${top + 3 * (cell + gap) + 10}" class="axis">Wed</text>
-  <text x="18" y="${top + 5 * (cell + gap) + 10}" class="axis">Fri</text>
-  <g filter="url(#softGlow)">
-    ${cells}
-  </g>
-  <rect x="${left - 4}" y="${top - 8}" width="92" height="${7 * (cell + gap) + 8}" fill="url(#sweep)" opacity="0.85">
-    <animate attributeName="x" from="${left - 80}" to="${left + 53 * (cell + gap)}" dur="6s" repeatCount="indefinite" />
-  </rect>
-  <text x="${width - 180}" y="${height - 32}" class="axis">Less</text>
-  ${colors.map((color, index) => `<rect x="${width - 145 + index * 18}" y="${height - 43}" width="11" height="11" rx="3" fill="${color}" />`).join('')}
-  <text x="${width - 48}" y="${height - 32}" class="axis">More</text>
+  <text x="32" y="59" class="sub">${total.toLocaleString('en-US')} contributions in the last year · last 31 days</text>
+  ${gridX.map((x) => `<line x1="${x.toFixed(2)}" x2="${x.toFixed(2)}" y1="${plot.y}" y2="${plot.y + plot.height}" class="grid" />`).join('')}
+  ${gridY.map((y) => `<line x1="${plot.x}" x2="${plot.x + plot.width}" y1="${y.toFixed(2)}" y2="${y.toFixed(2)}" class="grid" />`).join('')}
+  ${yLabels}
+  ${labels}
+  <text x="${plot.x + plot.width / 2}" y="${height - 18}" class="axis" text-anchor="middle">Days</text>
+  <text x="22" y="${plot.y + plot.height / 2}" class="axis" text-anchor="middle" transform="rotate(-90 22 ${plot.y + plot.height / 2})">Contributions</text>
+  <path d="${areaPath}" fill="url(#areaGradient)">
+    <animate attributeName="opacity" values="0.35;0.72;0.45;0.72" dur="6.5s" repeatCount="indefinite" />
+  </path>
+  <path id="activityLine" d="${linePath}" fill="none" stroke="url(#lineGradient)" stroke-width="4.5" stroke-linecap="round" filter="url(#softGlow)" pathLength="1000" />
+  <path d="${linePath}" fill="none" stroke="#79c0ff" stroke-width="7" stroke-linecap="round" opacity="0.65" pathLength="1000" stroke-dasharray="70 930" filter="url(#softGlow)">
+    <animate attributeName="stroke-dashoffset" values="1000;0" dur="4.2s" repeatCount="indefinite" />
+  </path>
+  <path d="${linePath}" fill="none" stroke="#58a6ff" stroke-width="4.5" stroke-linecap="round" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="1000">
+    <animate attributeName="stroke-dashoffset" values="1000;0;0" keyTimes="0;0.72;1" dur="7s" repeatCount="indefinite" />
+  </path>
+  ${nodes}
+  <circle r="6" fill="#79c0ff" filter="url(#softGlow)">
+    <animateMotion dur="5.6s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#activityLine" />
+    </animateMotion>
+    <animate attributeName="r" values="5;8;5" dur="1.4s" repeatCount="indefinite" />
+  </circle>
 </svg>
 `;
 }
