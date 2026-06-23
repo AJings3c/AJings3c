@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=AJings3c&theme=github_dark" alt="Repositories per language" />
+  <img src="https://raw.githubusercontent.com/AJings3c/AJings3c/main/assets/languages.svg" alt="Repository language rhythm" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=AJings3c&theme=github-dark&hide_border=true&area=true&custom_title=Activity" alt="GitHub activity graph" />
+  <img src="https://raw.githubusercontent.com/AJings3c/AJings3c/main/assets/activity.svg" alt="GitHub activity rhythm" />
 </p>
