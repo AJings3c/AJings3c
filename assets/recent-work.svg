@@ -36,7 +36,7 @@
         <text x="70" y="78" class="repo">Doperationtool</text>
         <text x="70" y="98" class="desc">A Go + Wails desktop toolkit for local security operations, Nuclei/POC pr…</text>
         <text x="708" y="78" class="meta">Go</text>
-        <text x="806" y="78" class="meta" text-anchor="end">Jun 24</text>
+        <text x="806" y="78" class="meta" text-anchor="end">Jun 23</text>
         <rect x="732" y="92" width="108" height="5" rx="2.5" fill="#0d1117" />
         <rect x="732" y="92" width="78" height="5" rx="2.5" fill="#00add8">
           <animate attributeName="width" values="18;78;62;78" dur="4s" begin="0.00s" repeatCount="indefinite" />
@@ -68,7 +68,7 @@
         <text x="70" y="194" class="repo">Threat-Intelligence</text>
         <text x="70" y="214" class="desc">Global threat-intelligence platform — aggregates public cyber threat feed…</text>
         <text x="708" y="194" class="meta">TypeScript</text>
-        <text x="806" y="194" class="meta" text-anchor="end">Jun 13</text>
+        <text x="806" y="194" class="meta" text-anchor="end">Jun 9</text>
         <rect x="732" y="208" width="108" height="5" rx="2.5" fill="#0d1117" />
         <rect x="732" y="208" width="58" height="5" rx="2.5" fill="#3178c6">
           <animate attributeName="width" values="18;58;46;58" dur="4s" begin="0.32s" repeatCount="indefinite" />
@@ -78,15 +78,15 @@
         <rect x="32" y="233" width="856" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
           <animate attributeName="opacity" values="0.48;0.72;0.55" dur="4.800000000000001s" begin="0.54s" repeatCount="indefinite" />
         </rect>
-        <circle cx="52" cy="254" r="6" fill="#00add8">
+        <circle cx="52" cy="254" r="6" fill="#8b949e">
           <animate attributeName="r" values="5;7;5" dur="3.34s" begin="0.39s" repeatCount="indefinite" />
         </circle>
-        <text x="70" y="252" class="repo">Xdfile-Manager</text>
-        <text x="70" y="272" class="desc">Xdfile Manager 是一个双栏终端文件管理器，支持本地文件操作、命令行执行、文件预览、主题切换、宏命令菜单以及 SSH / NetBox…</text>
-        <text x="708" y="252" class="meta">Go</text>
-        <text x="806" y="252" class="meta" text-anchor="end">Jun 8</text>
+        <text x="70" y="252" class="repo">defending-code-reference-harness_zh</text>
+        <text x="70" y="272" class="desc">Recently updated repository</text>
+        <text x="708" y="252" class="meta">Mixed</text>
+        <text x="806" y="252" class="meta" text-anchor="end">Jun 7</text>
         <rect x="732" y="266" width="108" height="5" rx="2.5" fill="#0d1117" />
-        <rect x="732" y="266" width="48" height="5" rx="2.5" fill="#00add8">
+        <rect x="732" y="266" width="48" height="5" rx="2.5" fill="#8b949e">
           <animate attributeName="width" values="18;48;38;48" dur="4s" begin="0.48s" repeatCount="indefinite" />
         </rect>
       </g>
