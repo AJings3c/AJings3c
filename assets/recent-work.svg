@@ -30,15 +30,15 @@
         <rect x="32" y="59" width="856" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
           <animate attributeName="opacity" values="0.48;0.72;0.55" dur="4.2s" begin="0.00s" repeatCount="indefinite" />
         </rect>
-        <circle cx="52" cy="80" r="6" fill="#8b949e">
+        <circle cx="52" cy="80" r="6" fill="#00add8">
           <animate attributeName="r" values="5;7;5" dur="2.8s" begin="0.00s" repeatCount="indefinite" />
         </circle>
-        <text x="70" y="78" class="repo">BurpSuiteMcp</text>
-        <text x="70" y="98" class="desc">Local-first Burp Suite MCP extension for HTTP, WebSocket, Scanner and Col…</text>
-        <text x="708" y="78" class="meta">Java</text>
-        <text x="806" y="78" class="meta" text-anchor="end">Jul 16</text>
+        <text x="70" y="78" class="repo">Doperationtool</text>
+        <text x="70" y="98" class="desc">A Go + Wails desktop toolkit for local security operations, Nuclei/POC pr…</text>
+        <text x="708" y="78" class="meta">Go</text>
+        <text x="806" y="78" class="meta" text-anchor="end">Jul 18</text>
         <rect x="732" y="92" width="108" height="5" rx="2.5" fill="#0d1117" />
-        <rect x="732" y="92" width="78" height="5" rx="2.5" fill="#8b949e">
+        <rect x="732" y="92" width="78" height="5" rx="2.5" fill="#00add8">
           <animate attributeName="width" values="18;78;62;78" dur="4s" begin="0.00s" repeatCount="indefinite" />
         </rect>
       </g>
@@ -46,15 +46,15 @@
         <rect x="32" y="117" width="856" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
           <animate attributeName="opacity" values="0.48;0.72;0.55" dur="4.4s" begin="0.18s" repeatCount="indefinite" />
         </rect>
-        <circle cx="52" cy="138" r="6" fill="#3178c6">
+        <circle cx="52" cy="138" r="6" fill="#8b949e">
           <animate attributeName="r" values="5;7;5" dur="2.98s" begin="0.13s" repeatCount="indefinite" />
         </circle>
-        <text x="70" y="136" class="repo">Threat-Intelligence</text>
-        <text x="70" y="156" class="desc">Global threat-intelligence platform — aggregates public cyber threat feed…</text>
-        <text x="708" y="136" class="meta">TypeScript</text>
-        <text x="806" y="136" class="meta" text-anchor="end">Jul 11</text>
+        <text x="70" y="136" class="repo">BurpSuiteMcp</text>
+        <text x="70" y="156" class="desc">Local-first Burp Suite MCP extension for HTTP, WebSocket, Scanner and Col…</text>
+        <text x="708" y="136" class="meta">Java</text>
+        <text x="806" y="136" class="meta" text-anchor="end">Jul 16</text>
         <rect x="732" y="150" width="108" height="5" rx="2.5" fill="#0d1117" />
-        <rect x="732" y="150" width="68" height="5" rx="2.5" fill="#3178c6">
+        <rect x="732" y="150" width="68" height="5" rx="2.5" fill="#8b949e">
           <animate attributeName="width" values="18;68;54;68" dur="4s" begin="0.16s" repeatCount="indefinite" />
         </rect>
       </g>
@@ -62,15 +62,15 @@
         <rect x="32" y="175" width="856" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
           <animate attributeName="opacity" values="0.48;0.72;0.55" dur="4.6000000000000005s" begin="0.36s" repeatCount="indefinite" />
         </rect>
-        <circle cx="52" cy="196" r="6" fill="#f05138">
+        <circle cx="52" cy="196" r="6" fill="#3178c6">
           <animate attributeName="r" values="5;7;5" dur="3.1599999999999997s" begin="0.26s" repeatCount="indefinite" />
         </circle>
-        <text x="70" y="194" class="repo">DayDayUp</text>
-        <text x="70" y="214" class="desc">一个安静、克制、原生的 macOS 学习执行监督台。</text>
-        <text x="708" y="194" class="meta">Swift</text>
+        <text x="70" y="194" class="repo">Threat-Intelligence</text>
+        <text x="70" y="214" class="desc">Global threat-intelligence platform — aggregates public cyber threat feed…</text>
+        <text x="708" y="194" class="meta">TypeScript</text>
         <text x="806" y="194" class="meta" text-anchor="end">Jul 11</text>
         <rect x="732" y="208" width="108" height="5" rx="2.5" fill="#0d1117" />
-        <rect x="732" y="208" width="58" height="5" rx="2.5" fill="#f05138">
+        <rect x="732" y="208" width="58" height="5" rx="2.5" fill="#3178c6">
           <animate attributeName="width" values="18;58;46;58" dur="4s" begin="0.32s" repeatCount="indefinite" />
         </rect>
       </g>
@@ -78,15 +78,15 @@
         <rect x="32" y="233" width="856" height="46" rx="8" fill="#161b22" opacity="0.62" stroke="#30363d">
           <animate attributeName="opacity" values="0.48;0.72;0.55" dur="4.800000000000001s" begin="0.54s" repeatCount="indefinite" />
         </rect>
-        <circle cx="52" cy="254" r="6" fill="#8b949e">
+        <circle cx="52" cy="254" r="6" fill="#f05138">
           <animate attributeName="r" values="5;7;5" dur="3.34s" begin="0.39s" repeatCount="indefinite" />
         </circle>
-        <text x="70" y="252" class="repo">AgScan</text>
-        <text x="70" y="272" class="desc">Recently updated repository</text>
-        <text x="708" y="252" class="meta">Mixed</text>
-        <text x="806" y="252" class="meta" text-anchor="end">Jun 30</text>
+        <text x="70" y="252" class="repo">DayDayUp</text>
+        <text x="70" y="272" class="desc">一个安静、克制、原生的 macOS 学习执行监督台。</text>
+        <text x="708" y="252" class="meta">Swift</text>
+        <text x="806" y="252" class="meta" text-anchor="end">Jul 11</text>
         <rect x="732" y="266" width="108" height="5" rx="2.5" fill="#0d1117" />
-        <rect x="732" y="266" width="48" height="5" rx="2.5" fill="#8b949e">
+        <rect x="732" y="266" width="48" height="5" rx="2.5" fill="#f05138">
           <animate attributeName="width" values="18;48;38;48" dur="4s" begin="0.48s" repeatCount="indefinite" />
         </rect>
       </g>
