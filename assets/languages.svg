@@ -24,7 +24,7 @@
             <animate attributeName="opacity" values="0.55;1;0.55" dur="2.8s" begin="0s" repeatCount="indefinite" />
           </rect>
           <text x="66" y="82" class="label">TypeScript</text>
-          <text x="176" y="82" class="value">42.7%</text>
+          <text x="176" y="82" class="value">42.6%</text>
           <rect x="228" y="73" width="260" height="7" rx="3.5" fill="#161b22" />
           <rect x="228" y="73" width="111" height="7" rx="3.5" fill="#3178c6">
             <animate attributeName="width" values="8;111;101;111" dur="4s" begin="0s" repeatCount="indefinite" />
@@ -46,7 +46,7 @@
             <animate attributeName="opacity" values="0.55;1;0.55" dur="3.1599999999999997s" begin="0.2s" repeatCount="indefinite" />
           </rect>
           <text x="66" y="132" class="label">Swift</text>
-          <text x="176" y="132" class="value">9.9%</text>
+          <text x="176" y="132" class="value">9.8%</text>
           <rect x="228" y="123" width="260" height="7" rx="3.5" fill="#161b22" />
           <rect x="228" y="123" width="26" height="7" rx="3.5" fill="#f05138">
             <animate attributeName="width" values="8;26;18;26" dur="4s" begin="0.32s" repeatCount="indefinite" />
@@ -90,32 +90,32 @@
     <g>
       
         <circle cx="525" cy="132" r="70" fill="none" stroke="#3178c6" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="187.69 252.14" stroke-dashoffset="0.00"
+          stroke-linecap="round" stroke-dasharray="187.38 252.45" stroke-dashoffset="0.00"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.2s" begin="0s" repeatCount="indefinite" />
         </circle>
         <circle cx="525" cy="132" r="70" fill="none" stroke="#8b949e" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="69.51 370.31" stroke-dashoffset="-187.69"
+          stroke-linecap="round" stroke-dasharray="69.40 370.42" stroke-dashoffset="-187.38"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.4000000000000004s" begin="0.15s" repeatCount="indefinite" />
         </circle>
         <circle cx="525" cy="132" r="70" fill="none" stroke="#f05138" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="43.39 396.43" stroke-dashoffset="-257.20"
+          stroke-linecap="round" stroke-dasharray="43.32 396.50" stroke-dashoffset="-256.78"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.6s" begin="0.3s" repeatCount="indefinite" />
         </circle>
         <circle cx="525" cy="132" r="70" fill="none" stroke="#f1e05a" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="42.49 397.33" stroke-dashoffset="-300.59"
+          stroke-linecap="round" stroke-dasharray="42.61 397.21" stroke-dashoffset="-300.10"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="3.8000000000000003s" begin="0.44999999999999996s" repeatCount="indefinite" />
         </circle>
         <circle cx="525" cy="132" r="70" fill="none" stroke="#00add8" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="41.24 398.59" stroke-dashoffset="-343.08"
+          stroke-linecap="round" stroke-dasharray="41.17 398.65" stroke-dashoffset="-342.71"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="4s" begin="0.6s" repeatCount="indefinite" />
         </circle>
         <circle cx="525" cy="132" r="70" fill="none" stroke="#8b949e" stroke-width="24"
-          stroke-linecap="round" stroke-dasharray="26.90 412.93" stroke-dashoffset="-384.32"
+          stroke-linecap="round" stroke-dasharray="26.85 412.97" stroke-dashoffset="-383.88"
           transform="rotate(-90 525 132)" opacity="0.92">
           <animate attributeName="stroke-width" values="22;27;22" dur="4.2s" begin="0.75s" repeatCount="indefinite" />
         </circle>

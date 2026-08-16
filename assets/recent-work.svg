@@ -36,7 +36,7 @@
         <text x="70" y="78" class="repo">DockerBridge</text>
         <text x="70" y="98" class="desc">Recently updated repository</text>
         <text x="708" y="78" class="meta">TypeScript</text>
-        <text x="806" y="78" class="meta" text-anchor="end">Jul 19</text>
+        <text x="806" y="78" class="meta" text-anchor="end">Aug 16</text>
         <rect x="732" y="92" width="108" height="5" rx="2.5" fill="#0d1117" />
         <rect x="732" y="92" width="78" height="5" rx="2.5" fill="#3178c6">
           <animate attributeName="width" values="18;78;62;78" dur="4s" begin="0.00s" repeatCount="indefinite" />
